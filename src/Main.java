@@ -1,45 +1,21 @@
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-
-import java.io.FileWriter;
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) throws IOException {
-        Scanner cep = new Scanner(System.in);
-        String buscador = "";
+        Scanner buscado = new Scanner(System.in);
+        ConsultarCep consultacep = new ConsultarCep();
 
-        Gson gson = new GsonBuilder()
-                .setPrettyPrinting().create();
-        FileWriter CepSerializado = new FileWriter("Ceps.json");
-        while (!buscador.equalsIgnoreCase("sair")) {
-            System.out.println("Digite o CEP desejado para realizar a busca ou digite 'Sair':");
-            buscador = cep.nextLine();
-            if (buscador.equalsIgnoreCase("sair")) {
-                break;
-            }
-            String enderecoAPICep = "https://viacep.com.br/ws/" + buscador + "/json/";
-            try {
-                HttpClient client = HttpClient.newHttpClient();
-                HttpRequest request = HttpRequest.newBuilder()
-                        .uri(URI.create(enderecoAPICep))
-                        .build();
-                HttpResponse<String> response = client
-                        .send(request, HttpResponse.BodyHandlers.ofString());
-                String json = response.body();
-                Cep cepformat = gson.fromJson(json, Cep.class);
-                System.out.println(cepformat);
-                CepSerializado.write(gson.toJson(cepformat) + "\n");
-            } catch (Exception e) {
-                System.out.println("Não encontrado!");
-                System.out.println("Verifique se o CEP digitado é valido!");
-            }
+        System.out.println("Digite o CEP desejada para realizar a consulta de endereço:");
+        String cep = buscado.nextLine();
+        try {
+            Endereco novoEndereco = consultacep.buscaCEP(cep);
+            System.out.println(novoEndereco);
+            GerandoJson gerar = new GerandoJson();
+            gerar.gerarJson(novoEndereco);
+        } catch (Exception e) {
+            System.out.println("Ocorreu um erro ao realizar a consulta.\nVerifique se o CEP está correto!");
         }
-        CepSerializado.close();
+
     }
 }
