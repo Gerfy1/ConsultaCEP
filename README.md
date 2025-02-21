@@ -6,7 +6,6 @@ Utilizado: API, Json, FileWriter
 ##
 Consult CEP: About ‘CEP’: Código de Endereçamento Postal (CEP) is a system of codes used in Brazil to identify locations and facilitate the delivery of mail. It consists of eight digits, divided into two parts by a hyphen. The first part represents the region and the second part represents the distribution identifiers.
 
-##
 About the application: The application performs the postcode query, checking that the number entered is valid. If it is, the programme will inform you of the location of that postcode. You can consult new postcodes or close and obtain a file with all the postcodes consulted. 
 Used: API Correios, Json, FileWriter
 Project carried out for the programme: Oracle One Study
