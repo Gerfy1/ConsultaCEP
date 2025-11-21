@@ -9,3 +9,10 @@ Consult CEP: About ‘CEP’: Código de Endereçamento Postal (CEP) is a system
 About the application: The application performs the postcode query, checking that the number entered is valid. If it is, the programme will inform you of the location of that postcode. You can consult new postcodes or close and obtain a file with all the postcodes consulted. 
 Used: API Correios, Json, FileWriter
 Project carried out for the programme: Oracle One Study
+
+## Tech
+
+- Java 
+- API Correios
+- JSON
+- FileWriter
